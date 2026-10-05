@@ -16,7 +16,7 @@ The PDF opens inline when the browser's PDF viewer is enabled. Personal browser 
 
 ## Update the portfolio
 
-Replace `RayZiruiLiu_Portfolio.pdf` with your new PDF using **exactly the same filename**, then commit and push:
+Replace `RayZiruiLiu_Portfolio.pdf` with your new web-ready PDF using **exactly the same filename**, then commit and push:
 
 ```sh
 git add RayZiruiLiu_Portfolio.pdf
@@ -24,19 +24,23 @@ git commit -m "Update portfolio PDF"
 git push
 ```
 
-The `/RayZiruiLiu_Portfolio.pdf` path stays unchanged. No PDF processing is performed.
+The `/RayZiruiLiu_Portfolio.pdf` path stays unchanged. Keep replacements under GitHub's regular 100 MB file limit and enable PDF linearization (Fast Web View) when exporting or optimizing.
 
-## Git LFS and future hosting
+## GitHub and hosting
 
-The original PDF exceeds GitHub's regular 100 MB file limit, so it is tracked with Git LFS. Install Git LFS, run `git lfs install`, and use `git lfs pull` after cloning if needed. The working PDF must be the actual PDF, not a Git LFS pointer.
+The optimized PDF fits GitHub's regular file limit and is now committed as actual PDF bytes, without Git LFS. The earlier original remains in repository history through Git LFS.
 
-No hosting, deployment, domain, or DNS is configured by this project. A GitHub repository is source storage, not a hosted website. When hosting later, publish the actual PDF at `/RayZiruiLiu_Portfolio.pdf`. Retrieve Git LFS objects during checkout, allow the full file size, and serve `application/pdf` without an attachment header.
+The public PDF URL is `https://rayziruiliu-portfolio-c.vercel.app/RayZiruiLiu_Portfolio.pdf`. The repository contains no hosting configuration. Serve the actual PDF with `application/pdf`, without an attachment header. Byte-range support lets browsers take advantage of Fast Web View.
 
 Git LFS pointer text begins with `version https://git-lfs.github.com/spec/v1`; it is not a PDF. Serving that pointer with a PDF Content-Type makes Chrome display "Failed to load PDF document." A valid checkout must contain the actual PDF bytes starting with `%PDF-`.
 
-## Original integrity
+## Web optimization
 
-- Size: `156555522` bytes
-- SHA-256: `7d1c73599445bb7c7e608316e02d6445690dab066294079c8f069fd542307dc9`
+- Original: `156555522` bytes (149.3 MiB).
+- Optimized: `41189550` bytes (39.3 MiB), approximately 74% smaller.
+- 39 pages; Fast Web View enabled.
+- Oversized JPEG images selectively resampled and recompressed. General images use about 150 PPI, selected large screen images 130 PPI, and interface content 200 PPI. Fine detail uses higher JPEG quality and full chroma resolution.
+- Transparency masks optimized separately, with lossless compression; vector drawing commands, extracted text, embedded fonts, and ICC color profiles preserved. No pages rasterized.
+- Representative render, photo, text, diagram, and gradient pages compared at fit-to-screen and 100% scale; independently rendered with Poppler and Chrome's native PDF viewer.
 
-These values describe the original version; they change when you intentionally replace the portfolio.
+These sizes describe this version; they change when you replace the portfolio.
