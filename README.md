@@ -1,22 +1,18 @@
-# Ray's portfolio
+# Portfolio PDF
 
-A minimal static portfolio site. No framework, dependencies, build step, or third-party PDF viewer.
-
-## Files and routes
-
-- `index.html`: responsive home page at `/`, with metadata and your LinkedIn profile link.
-- `portfolio/index.html`: immediately redirects to `/RayZiruiLiu_Portfolio.pdf` using native HTML. A fallback link is included.
-- `RayZiruiLiu_Portfolio.pdf`: original, full-quality portfolio, served directly to the browser's PDF viewer.
-- `favicon.svg`: simple R favicon.
-- `serve.mjs`: dependency-free local preview server with PDF byte-range support.
+The only public asset is `RayZiruiLiu_Portfolio.pdf`. No home page, HTML, redirects, custom viewer, JavaScript, framework, or build step.
 
 ## Local preview
 
-With Node.js installed, run `node serve.mjs` from this folder. Open `http://127.0.0.1:3000`, `/portfolio`, and `/RayZiruiLiu_Portfolio.pdf`.
+With Python 3 installed, run from this folder:
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+Open **http://127.0.0.1:8000/RayZiruiLiu_Portfolio.pdf**. The standard static-file server returns the PDF directly with `application/pdf`. It is a local preview tool only.
 
 The PDF opens inline when the browser's PDF viewer is enabled. Personal browser preferences can override this and download PDFs instead.
-
-The LinkedIn URL in `index.html` comes from the portfolio's cover page.
 
 ## Update the portfolio
 
@@ -28,10 +24,19 @@ git commit -m "Update portfolio PDF"
 git push
 ```
 
-The `/portfolio` link stays unchanged. No PDF processing is performed.
+The `/RayZiruiLiu_Portfolio.pdf` path stays unchanged. No PDF processing is performed.
 
 ## Git LFS and future hosting
 
 The original PDF exceeds GitHub's regular 100 MB file limit, so it is tracked with Git LFS. Install Git LFS, run `git lfs install`, and use `git lfs pull` after cloning if needed. The working PDF must be the actual PDF, not a Git LFS pointer.
 
-No hosting, deployment, domain, or DNS is configured. When choosing hosting later, publish the static files at the domain root, enable standard directory-index resolution for `/portfolio` (or `/portfolio/`), and ensure Git LFS downloads the actual PDF during checkout. The host must allow the PDF's file size, serve `.pdf` as `application/pdf`, and avoid `Content-Disposition: attachment`. No custom rewrite is needed on a host that supports directory indexes; hosts without this support need a `/portfolio` redirect to the PDF. Verify these routes on the chosen host before publishing.
+No hosting, deployment, domain, or DNS is configured by this project. A GitHub repository is source storage, not a hosted website. When hosting later, publish the actual PDF at `/RayZiruiLiu_Portfolio.pdf`. Retrieve Git LFS objects during checkout, allow the full file size, and serve `application/pdf` without an attachment header.
+
+Git LFS pointer text begins with `version https://git-lfs.github.com/spec/v1`; it is not a PDF. Serving that pointer with a PDF Content-Type makes Chrome display "Failed to load PDF document." A valid checkout must contain the actual PDF bytes starting with `%PDF-`.
+
+## Original integrity
+
+- Size: `156555522` bytes
+- SHA-256: `7d1c73599445bb7c7e608316e02d6445690dab066294079c8f069fd542307dc9`
+
+These values describe the original version; they change when you intentionally replace the portfolio.
