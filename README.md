@@ -1,6 +1,6 @@
 # Portfolio PDF
 
-The only public asset is `RayZiruiLiu_Portfolio.pdf`. No home page, HTML, redirects, custom viewer, JavaScript, framework, or build step.
+The portfolio is `RayZiruiLiu_Portfolio.pdf`. A tiny, invisible HTML redirect at `/` opens that PDF immediately, with no homepage interface, custom viewer, JavaScript, framework, or build step.
 
 ## Local preview
 
@@ -30,7 +30,7 @@ The `/RayZiruiLiu_Portfolio.pdf` path stays unchanged. Keep replacements under G
 
 The optimized PDF fits GitHub's regular file limit and is now committed as actual PDF bytes, without Git LFS. The earlier original remains in repository history through Git LFS.
 
-The public PDF URL is `https://rayziruiliu-portfolio-c.vercel.app/RayZiruiLiu_Portfolio.pdf`. The repository contains no hosting configuration. Serve the actual PDF with `application/pdf`, without an attachment header. Byte-range support lets browsers take advantage of Fast Web View.
+The public PDF URL is `https://rayziruiliu-portfolio-c-one.vercel.app/RayZiruiLiu_Portfolio.pdf`. The repository contains no hosting configuration. Serve the actual PDF with `application/pdf`, without an attachment header. Byte-range support lets browsers take advantage of Fast Web View.
 
 Git LFS pointer text begins with `version https://git-lfs.github.com/spec/v1`; it is not a PDF. Serving that pointer with a PDF Content-Type makes Chrome display "Failed to load PDF document." A valid checkout must contain the actual PDF bytes starting with `%PDF-`.
 
